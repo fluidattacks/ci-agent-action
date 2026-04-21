@@ -11,8 +11,9 @@ inputs:
     description: 'CI Gate token for authentication with the Fluid Attacks platform'
     required: true
   repo_name:
-    description: 'Git repository nickname in the Fluid Attacks platform'
-    required: true
+    description: 'Git repository nickname in the Fluid Attacks platform. Defaults to the GitHub repository name when not set.'
+    required: false
+    default: ''
   strict:
     description: 'Enable strict mode. Breaks the build if open or untreated vulnerabilities are found.'
     required: false

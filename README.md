@@ -52,7 +52,7 @@ In lax mode (default), the action always exits successfully and sets `vulnerabil
 | Input | Required | Default | Description |
 |---|---|---|---|
 | `api_token` | Yes | — | CI Gate token for authenticating with the Fluid Attacks platform. Use a secret: `${{ secrets.FA_API_TOKEN }}`. |
-| `repo_name` | Yes | — | Repository nickname as configured in the Fluid Attacks platform. |
+| `repo_name` | No | GitHub repo name | Repository nickname as configured in the Fluid Attacks platform. When not set, defaults to the GitHub repository name (`GITHUB_REPOSITORY` minus the owner prefix). |
 | `strict` | No | `false` | Set to `true` to enable strict mode. The job fails if open or untreated vulnerabilities that break policy are found. |
 | `report_output_path` | No | — | Path relative to the workspace root where the JSON report will be saved. If not set, no report file is written. |
 
@@ -128,6 +128,10 @@ Run in lax mode but fail the job manually based on the output:
 ### The action fails with an authentication error
 
 Verify that your CI Gate token is correct and has not expired. Tokens are valid for 180 days. To renew it, go to **Organization → Groups → GroupName → DevSecOps** in the platform and click **Manage token**. Update the `FA_API_TOKEN` secret in your repository with the new token.
+
+### You see the error "Remote check failed"
+
+Ensure that `repo_name` matches the nickname registered in the Fluid Attacks platform exactly. When `repo_name` is not set, the action derives it from the GitHub repository name, which may differ from the nickname on the platform. Set `repo_name` explicitly to resolve the mismatch.
 
 ### The action reports no vulnerabilities but I expect some
 

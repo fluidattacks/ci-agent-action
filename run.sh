@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+if [[ -z "${FA_REPO_NAME}" ]]; then
+  FA_REPO_NAME="${GITHUB_REPOSITORY##*/}"
+fi
+
+echo "::notice::Running CI Agent for repository: ${FA_REPO_NAME}"
+
 STRICT_FLAG="--lax"
 if [[ "${FA_STRICT}" == "true" ]]; then
   STRICT_FLAG="--strict"
