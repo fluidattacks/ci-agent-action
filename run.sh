@@ -21,7 +21,7 @@ if [[ -n "${FA_REPORT_PATH}" ]]; then
 fi
 
 exit_code=0
-docker run "${DOCKER_ARGS[@]}" fluidattacks/forces:latest "${FORCES_ARGS[@]}" || exit_code=$?
+docker run "${DOCKER_ARGS[@]}" ghcr.io/fluidattacks/forces:latest "${FORCES_ARGS[@]}" || exit_code=$?
 
 if [[ ${exit_code} -eq 0 ]]; then
   echo "vulnerabilities_found=false" >> "${GITHUB_OUTPUT}"

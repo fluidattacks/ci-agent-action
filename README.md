@@ -18,7 +18,7 @@ Add the file `.github/workflows/ci-gate.yml` to your repository:
 name: Fluid Attacks CI Gate
 
 on:
-  pull_request:
+  pull_request_target:
     types: [opened, synchronize, reopened]
 
 jobs:
@@ -33,6 +33,12 @@ jobs:
 ```
 
 Replace `<version>` with the latest release tag and `my-repo` with the repository nickname configured in the Fluid Attacks platform. Push the file and the check will run automatically.
+
+> **Why `pull_request_target` instead of `pull_request`?**
+> GitHub withholds secrets from workflows triggered by `pull_request` when the PR comes from a fork,
+> so the action would fail to authenticate. `pull_request_target` runs in the context of the base branch
+> and always has access to secrets. This is safe here because the action never checks out or executes
+> any code from the PR — it only calls the Fluid Attacks API.
 
 ## Prerequisites
 
